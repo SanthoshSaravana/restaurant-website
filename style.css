@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  padding: 15px;
+}
+
+/* Carousel */
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* About Us Section */
+#about {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.about-image img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.about-content {
+  max-width: 50%;
+}
+
+.about-content h2 {
+  color: #d9534f;
+  font-size: 2rem;
+}
+
+.about-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-content ul li {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.about-content ul li i {
+  color: #d9534f;
+  margin-right: 10px;
+}
+
+.about-content .btn {
+  background-color: #d9534f;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+/* Food Categories */
+#food {
+  padding: 50px 0;
+  background-color: #fff;
+}
+
+.food-item {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.food-item img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.food-item h3 {
+  margin-top: 15px;
+  color: #d9534f;
+  font-size: 1.5rem;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 15px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .about-content {
+      max-width: 100%;
+  }
+}

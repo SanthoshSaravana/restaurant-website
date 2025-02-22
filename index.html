@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YumYum - Indian Fine Dining</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            background: linear-gradient(90deg, #ff8a00, #da1b60);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 138, 0, 0.9);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            color: white !important;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #ffd700 !important;
+        }
+        .section {
+            padding: 100px 0;
+        }
+        .carousel-item img {
+            height: 90vh;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+        .menu-category {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 30px; /* Added gap between categories */
+        }
+        .menu-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .menu-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 90%;
+            max-width: 800px;
+            z-index: 1000;
+            display: none;
+        }
+        .menu-popup.active {
+            display: block;
+        }
+        .menu-popup h3 {
+            margin-bottom: 20px;
+        }
+        .menu-popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .menu-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .menu-item h5 {
+            margin: 0;
+        }
+        .menu-item p {
+            margin: 5px 0;
+            color: #777;
+        }
+        .rating {
+            color: #ff8a00;
+        }
+        .testimonial-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+        .testimonial-box:hover {
+            transform: translateY(-10px);
+        }
+        .testimonial-box .rating {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .testimonial-box h5 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .testimonial-box p {
+            margin: 10px 0 0;
+            color: #555;
+        }
+        footer {
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #ff8a00, #da1b60);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: scale(1.1);
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🍽️ YumYum</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="image1.jpg" class="d-block w-100" alt="Restaurant Interior">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="animate__animated animate__fadeInDown">Welcome to YumYum</h1>
+                    <p class="animate__animated animate__fadeInUp">Experience the finest Indian dining.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="image2.jpg" class="d-block w-100" alt="Fine Dining">
+                <div class="carousel-caption d-none d-md-block">
+                    <h1 class="animate__animated animate__fadeInDown">Delicious Indian Food</h1>
+                    <p class="animate__animated animate__fadeInUp">Crafted with love and passion.</p>
+                </div>
+            </div>
+            <!-- Add 3 more carousel items -->
+        </div>
+    </section>
+
+    <section id="menu" class="section">
+        <div class="container text-center">
+            <h2 class="mb-4 animate-on-scroll">Our Menu 🍴</h2>
+            <div class="row">
+                <div class="col-md-3 menu-category animate-on-scroll" onclick="openMenu('starters')">
+                    <h4>Starters</h4>
+                </div>
+                <div class="col-md-3 menu-category animate-on-scroll" onclick="openMenu('maincourse')">
+                    <h4>Main Course</h4>
+                </div>
+                <div class="col-md-3 menu-category animate-on-scroll" onclick="openMenu('desserts')">
+                    <h4>Desserts</h4>
+                </div>
+                <div class="col-md-3 menu-category animate-on-scroll" onclick="openMenu('softdrinks')">
+                    <h4>Soft Drinks</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Popups -->
+    <div id="starters-menu" class="menu-popup">
+        <div class="close-btn" onclick="closeMenu('starters')">×</div>
+        <h3>Starters</h3>
+        <div id="starters-items">
+            <!-- 20 Starter Items -->
+            <div class="menu-item"><h5>Paneer Tikka</h5><p>₹220 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken 65</h5><p>₹250 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Aloo Tikki</h5><p>₹120 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Veg Pakora</h5><p>₹150 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Fish Fry</h5><p>₹280 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Chicken Lollipop</h5><p>₹300 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Spring Roll</h5><p>₹180 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Gobi Manchurian</h5><p>₹200 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Prawn Fry</h5><p>₹320 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Corn Chaat</h5><p>₹130 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Chicken Tikka</h5><p>₹270 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Paneer Pakora</h5><p>₹160 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Mushroom Fry</h5><p>₹190 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Chilli Paneer</h5><p>₹210 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken Wings</h5><p>₹290 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Onion Bhaji</h5><p>₹140 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Paneer Chilli</h5><p>₹230 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken Seekh Kebab</h5><p>₹260 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Veg Cutlet</h5><p>₹170 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Chicken Satay</h5><p>₹310 | ★★★★★</p></div>
+        </div>
+    </div>
+    <div id="maincourse-menu" class="menu-popup">
+        <div class="close-btn" onclick="closeMenu('maincourse')">×</div>
+        <h3>Main Course</h3>
+        <div id="maincourse-items">
+            <!-- 20 Main Course Items -->
+            <div class="menu-item"><h5>Butter Chicken</h5><p>₹350 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Paneer Butter Masala</h5><p>₹280 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken Biryani</h5><p>₹320 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Veg Biryani</h5><p>₹250 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Dal Makhani</h5><p>₹200 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Palak Paneer</h5><p>₹240 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken Curry</h5><p>₹300 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Fish Curry</h5><p>₹330 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Mutton Rogan Josh</h5><p>₹400 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Veg Kofta</h5><p>₹220 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Chicken Korma</h5><p>₹310 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Malai Kofta</h5><p>₹260 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Prawn Curry</h5><p>₹360 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Kadai Paneer</h5><p>₹270 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Chicken Tikka Masala</h5><p>₹340 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Rajma Chawal</h5><p>₹180 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Chole Bhature</h5><p>₹200 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Hyderabadi Biryani</h5><p>₹380 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Aloo Gobi</h5><p>₹190 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Egg Curry</h5><p>₹210 | ★★★★☆</p></div>
+        </div>
+    </div>
+    <div id="desserts-menu" class="menu-popup">
+        <div class="close-btn" onclick="closeMenu('desserts')">×</div>
+        <h3>Desserts</h3>
+        <div id="desserts-items">
+            <!-- 20 Dessert Items -->
+            <div class="menu-item"><h5>Gulab Jamun</h5><p>₹100 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Rasmalai</h5><p>₹120 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Kheer</h5><p>₹90 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Rasgulla</h5><p>₹110 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Kulfi</h5><p>₹80 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Jalebi</h5><p>₹70 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Shahi Tukda</h5><p>₹130 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Phirni</h5><p>₹100 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Malpua</h5><p>₹90 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Rabri</h5><p>₹110 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Gajar Halwa</h5><p>₹140 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Besan Ladoo</h5><p>₹60 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Badam Halwa</h5><p>₹150 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Moong Dal Halwa</h5><p>₹130 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Kaju Katli</h5><p>₹200 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Peda</h5><p>₹70 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Sandesh</h5><p>₹80 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Mysore Pak</h5><p>₹90 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Balushahi</h5><p>₹60 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Cham Cham</h5><p>₹100 | ★★★★☆</p></div>
+        </div>
+    </div>
+    <div id="softdrinks-menu" class="menu-popup">
+        <div class="close-btn" onclick="closeMenu('softdrinks')">×</div>
+        <h3>Soft Drinks</h3>
+        <div id="softdrinks-items">
+            <!-- 20 Soft Drink Items -->
+            <div class="menu-item"><h5>Mango Lassi</h5><p>₹120 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Sweet Lassi</h5><p>₹100 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Masala Soda</h5><p>₹60 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Nimbu Pani</h5><p>₹50 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Thandai</h5><p>₹110 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Badam Milk</h5><p>₹130 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Rose Milk</h5><p>₹90 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Pineapple Juice</h5><p>₹80 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Orange Juice</h5><p>₹70 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Watermelon Juice</h5><p>₹90 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Apple Juice</h5><p>₹100 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Pomegranate Juice</h5><p>₹110 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Grape Juice</h5><p>₹90 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Kiwi Juice</h5><p>₹120 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Strawberry Shake</h5><p>₹140 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Chocolate Shake</h5><p>₹150 | ★★★★★</p></div>
+            <div class="menu-item"><h5>Vanilla Shake</h5><p>₹130 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Cold Coffee</h5><p>₹110 | ★★★★☆</p></div>
+            <div class="menu-item"><h5>Iced Tea</h5><p>₹70 | ★★★☆☆</p></div>
+            <div class="menu-item"><h5>Lemon Soda</h5><p>₹60 | ★★★☆☆</p></div>
+        </div>
+    </div>
+
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="text-center animate-on-scroll">What Our Customers Say 🌟</h2>
+            <div class="owl-carousel owl-theme">
+                <!-- 10 Testimonials -->
+                <div class="testimonial-box">
+                    <div class="rating">★★★★★</div>
+                    <h5>Rahul Sharma</h5>
+                    <p>"The food was amazing! The flavors were authentic and delicious. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★☆</div>
+                    <h5>Priya Patel</h5>
+                    <p>"Great ambiance and excellent service. The desserts were to die for!"</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★★</div>
+                    <h5>Ankit Singh</h5>
+                    <p>"Best Indian food in town. The starters were especially delicious."</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★☆</div>
+                    <h5>Neha Gupta</h5>
+                    <p>"Loved the variety of dishes. The soft drinks were refreshing."</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★★</div>
+                    <h5>Vikram Mehta</h5>
+                    <p>"A must-visit for anyone who loves Indian cuisine. The service was top-notch."</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★☆</div>
+                    <h5>Swati Reddy</h5>
+                    <p>"The desserts were heavenly. Will definitely come back for more!"</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★★</div>
+                    <h5>Arjun Kapoor</h5>
+                    <p>"The food was fresh and flavorful. A great dining experience!"</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★☆</div>
+                    <h5>Kavita Joshi</h5>
+                    <p>"The starters were delicious. The ambiance was cozy and inviting."</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★★</div>
+                    <h5>Rohit Verma</h5>
+                    <p>"The best Indian restaurant in the city. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-box">
+                    <div class="rating">★★★★☆</div>
+                    <h5>Anjali Desai</h5>
+                    <p>"The food was amazing, and the service was excellent. Will visit again!"</p>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <h4>Leave a Review</h4>
+                <form id="reviewForm">
+                    <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+                    <select class="form-control mb-3" required>
+                        <option value="">Select Rating</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★☆</option>
+                        <option value="3">★★★☆☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
+                    </select>
+                    <textarea class="form-control mb-3" placeholder="Your Review" required></textarea>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container text-center">
+            <h2 class="animate-on-scroll">Contact Us 📍</h2>
+            <form id="contactForm">
+                <input type="text" class="form-control mb-3" placeholder="Your Name" required>
+                <input type="email" class="form-control mb-3" placeholder="Your Email" required>
+                <textarea class="form-control mb-3" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 YumYum. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener("scroll", function() {
+            const navbar = document.querySelector(".navbar");
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+
+        // Menu Popup Functions
+        function openMenu(category) {
+            document.getElementById(`${category}-menu`).classList.add("active");
+        }
+        function closeMenu(category) {
+            document.getElementById(`${category}-menu`).classList.remove("active");
+        }
+
+        // Owl Carousel for Testimonials
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 }
+                }
+            });
+        });
+
+        // Animate on scroll
+        const animateElements = document.querySelectorAll(".animate-on-scroll");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // Review Form Submission
+        document.getElementById("reviewForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const name = this.querySelector("input[type='text']").value;
+            const rating = this.querySelector("select").value;
+            const review = this.querySelector("textarea").value;
+            const testimonialBox = document.createElement("div");
+            testimonialBox.className = "testimonial-box";
+            testimonialBox.innerHTML = `
+                <div class="rating">${'★'.repeat(rating)}${'☆'.repeat(5 - rating)}</div>
+                <h5>${name}</h5>
+                <p>"${review}"</p>
+            `;
+            document.querySelector(".owl-carousel").appendChild(testimonialBox);
+            this.reset();
+        });
+
+        // Contact Form Submission
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Thank you for contacting us! We'll get back to you soon.");
+            this.reset();
+        });
+    </script>
+</body>
+</html>

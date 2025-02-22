@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table | Gourmet Delight</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <style>
+        .booking {
+            background: url('booking-bg.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 40px 0;
+        }
+        .booking .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+        }
+        .booking h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .booking form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .booking button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        .booking button:hover {
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="menu-items">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#menu">Menu</a></li>
+        </ul>
+    </nav>
+
+    <section class="booking">
+        <div class="container">
+            <h2>Reserve Your Table</h2>
+            <p>Book a table in advance and enjoy a premium dining experience.</p>
+            <form id="bookingForm">
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="date" id="date" required>
+                <input type="time" id="time" required>
+                <button type="submit">Book Now</button>
+            </form>
+            <p id="confirmationMessage"></p>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("Website Loaded Successfully!");
+    
+            document.getElementById("bookingForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+    
+                let name = document.getElementById("name").value;
+                let email = document.getElementById("email").value;
+                let phone = document.getElementById("phone").value;
+                let date = document.getElementById("date").value;
+                let time = document.getElementById("time").value;
+    
+                let message = `Thank you, ${name}! Your reservation on ${date} at ${time} has been confirmed.`;
+                document.getElementById("confirmationMessage").textContent = message;
+                document.getElementById("bookingForm").reset();
+            });
+        });
+    </script>
+</body>
+</html>
